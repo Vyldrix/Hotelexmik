@@ -1,0 +1,174 @@
+import time
+
+# --- Datos simulados (en una aplicación real, esto sería una base de datos) ---
+usuarios = {
+    "usuario1": {"password": "clave1", "reservas": []},
+    "usuario2": {"password": "clave2", "reservas": []},
+}
+
+destinos_turisticos = {
+    "Bariloche": {"precio": 500, "descripcion": "Nieve, lagos y montañas."},
+    "Cataratas del Iguazu": {"precio": 400, "descripcion": "Impresionantes cascadas."},
+    "Salta": {"precio": 350, "descripcion": "Paisajes coloridos y cultura andina."},
+    "Ushuaia": {"precio": 600, "descripcion": "Fin del mundo, glaciares y pingüinos."},
+}
+
+# --- Variables de sesión ---
+usuario_actual = None
+
+# --- Funciones de la aplicación ---
+
+def mostrar_menu_principal():
+    print("\n--- Menú Principal ---")
+    print("1. Iniciar Sesión")
+    print("2. Registrarse")
+    print("3. Salir")
+    print("----------------------")
+
+def mostrar_menu_usuario():
+    print("\n--- Menú de Usuario ---")
+    print(f"¡Bienvenido, {usuario_actual}!")
+    print("1. Ver Destinos Turísticos")
+    print("2. Realizar una Reserva")
+    print("3. Ver mis Reservas")
+    print("4. Cerrar Sesión")
+    print("------------------------")
+
+def iniciar_sesion():
+    global usuario_actual
+    print("\n--- Iniciar Sesión ---")
+    username = input("Ingresa tu nombre de usuario: ")
+    password = input("Ingresa tu contraseña: ")
+
+    if username in usuarios and usuarios[username]["password"] == password:
+        usuario_actual = username
+        print("¡Inicio de sesión exitoso!")
+        time.sleep(1)
+    else:
+        print("Nombre de usuario o contraseña incorrectos.")
+        time.sleep(1)
+
+def registrarse():
+    print("\n--- Registrarse ---")
+    while True:
+        username = input("Elige un nombre de usuario: ")
+        if username in usuarios:
+            print("Ese nombre de usuario ya existe. Por favor, elige otro.")
+        else:
+            password = input("Elige una contraseña: ")
+            usuarios[username] = {"password": password, "reservas": []}
+            print(f"Usuario '{username}' registrado exitosamente.")
+            time.sleep(1)
+            break
+
+def ver_destinos_turisticos():
+    print("\n--- Destinos Turísticos Disponibles ---")
+    for i, (destino, info) in enumerate(destinos_turisticos.items()):
+        print(f"{i+1}. {destino}:")
+        print(f"   - Precio: ${info['precio']} (por persona)")
+        print(f"   - Descripción: {info['descripcion']}")
+    print("---------------------------------------")
+    input("Presiona Enter para continuar...")
+
+def realizar_reserva():
+    print("\n--- Realizar una Reserva ---")
+    if not destinos_turisticos:
+        print("No hay destinos turísticos disponibles en este momento.")
+        time.sleep(1)
+        return
+
+    ver_destinos_turisticos()
+    try:
+        opcion_destino = int(input("Ingresa el número del destino que deseas reservar: "))
+        destinos_lista = list(destinos_turisticos.keys())
+
+        if 1 <= opcion_destino <= len(destinos_lista):
+            destino_seleccionado = destinos_lista[opcion_destino - 1]
+            precio_destino = destinos_turisticos[destino_seleccionado]["precio"]
+
+            while True:
+                try:
+                    num_personas = int(input(f"¿Cuántas personas viajarán a {destino_seleccionado}? "))
+                    if num_personas > 0:
+                        break
+                    else:
+                        print("El número de personas debe ser positivo.")
+                except ValueError:
+                    print("Por favor, ingresa un número válido.")
+
+            costo_total = precio_destino * num_personas
+            print(f"\nResumen de la Reserva:")
+            print(f"Destino: {destino_seleccionado}")
+            print(f"Personas: {num_personas}")
+            print(f"Costo Total: ${costo_total}")
+
+            confirmar = input("¿Confirmar reserva? (s/n): ").lower()
+            if confirmar == 's':
+                usuarios[usuario_actual]["reservas"].append({
+                    "destino": destino_seleccionado,
+                    "personas": num_personas,
+                    "costo": costo_total,
+                    "fecha_reserva": time.strftime("%Y-%m-%d %H:%M:%S")
+                })
+                print("¡Reserva realizada con éxito!")
+            else:
+                print("Reserva cancelada.")
+        else:
+            print("Opción de destino no válida.")
+    except ValueError:
+        print("Entrada inválida. Por favor, ingresa un número.")
+    time.sleep(1)
+
+def ver_mis_reservas():
+    print("\n--- Mis Reservas ---")
+    if not usuarios[usuario_actual]["reservas"]:
+        print("No tienes reservas realizadas aún.")
+    else:
+        for i, reserva in enumerate(usuarios[usuario_actual]["reservas"]):
+            print(f"{i+1}. Destino: {reserva['destino']}")
+            print(f"   Personas: {reserva['personas']}")
+            print(f"   Costo: ${reserva['costo']}")
+            print(f"   Fecha de Reserva: {reserva['fecha_reserva']}")
+            print("--------------------")
+    input("Presiona Enter para continuar...")
+
+def cerrar_sesion():
+    global usuario_actual
+    print("Cerrando sesión...")
+    usuario_actual = None
+    time.sleep(1)
+
+# --- Bucle principal de la aplicación ---
+def main():
+    while True:
+        if usuario_actual is None:
+            mostrar_menu_principal()
+            opcion = input("Elige una opción: ")
+            if opcion == '1':
+                iniciar_sesion()
+            elif opcion == '2':
+                registrarse()
+            elif opcion == '3':
+                print("¡Gracias por usar nuestra pseudo aplicación de turismo!")
+                break
+            else:
+                print("Opción inválida. Por favor, intenta de nuevo.")
+                time.sleep(1)
+        else:
+            mostrar_menu_usuario()
+            opcion = input("Elige una opción: ")
+            if opcion == '1':
+                ver_destinos_turisticos()
+            elif opcion == '2':
+                realizar_reserva()
+            elif opcion == '3':
+                ver_mis_reservas()
+            elif opcion == '4':
+                cerrar_sesion()
+            else:
+                print("Opción inválida. Por favor, intenta de nuevo.")
+                time.sleep(1)
+
+if __name__ == "__main__":
+    main()
+j
