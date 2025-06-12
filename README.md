@@ -1,4 +1,4 @@
- .# 🏨 Aplicación de Hotelería en Python
+🏨 Aplicación de Hotelería en Python
 
 Aplicación de escritorio para la gestión de reservas, habitaciones y huéspedes en un hotel.
 
