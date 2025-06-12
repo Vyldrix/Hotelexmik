@@ -42,22 +42,18 @@ La aplicación permite al recepcionista:
 
 ## 📂 Estructura del Proyecto
 hotel_app/
-├── main.py
+├── main.py                      ← inicia la app (Tkinter)
 ├── db/
-│   └── hotel.db
+│   └── hotel.db                 ← base de datos SQLite
 ├── models/
-│   └── database.py
-├── controllers/
-│   └── logic.py
+│   └── database.py              ← Python puro: conexión y consultas a SQLite
 ├── views/
-│   ├── main_window.py
-│   └── forms.py
-├── doc/
-│   └── Documentacion_App_Hoteleria.docx
-├── assets/
-│   └── icons/
-├── README.md
-└── requirements.txt
+│   ├── main_window.py           ← Tkinter: ventana principal y navegación
+│   └── forms.py                 ← Tkinter: formularios (registro, reservas, etc.)
+├── controllers/
+│   └── logic.py                 ← Python puro: lógica de negocio
+└── assets/
+    └── icons/                   ← recursos visuales
 
 ---
 
