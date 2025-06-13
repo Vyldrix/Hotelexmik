@@ -1,0 +1,8 @@
+# No es obligatorio instalar nada si solo usás Tkinter y sqlite3
+
+# Librerías estándar (Tkinter, sqlite3 ya vienen con Python)
+
+# Librerías útiles adicionales (recomendadas)
+Pillow>=10.0.0          # Para mostrar imágenes en la GUI (por ejemplo, íconos)
+reportlab>=4.0.0        # Para generar facturas o reportes en PDF
+openpyxl>=3.1.2         # Para exportar datos a Excel (opcional)

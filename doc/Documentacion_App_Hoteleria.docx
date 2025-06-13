@@ -1,0 +1,91 @@
+Aplicación de Escritorio para Gestión Hotelera
+
+Índice
+
+1. Introducción
+2. Objetivos
+3. Tecnologías utilizadas
+4. Estructura del proyecto
+5. Historias de usuario
+6. Pruebas de aceptación
+7. Manual de uso
+8. Mejoras futuras
+9. Crédito
+
+1. Introducción
+
+La presente documentación describe el funcionamiento, estructura y alcance de una aplicación de escritorio para la gestión de un hotel. El sistema permite registrar huéspedes, habitaciones, realizar reservas y llevar un control de check-in y check-out.
+
+2. Objetivos
+
+- Facilitar la administración de reservas de un hotel.
+- Permitir un registro rápido de huéspedes.
+- Visualizar la disponibilidad de habitaciones en tiempo real.
+- Reducir el error humano en el proceso de reservas y check-in.
+
+3. Tecnologías utilizadas
+
+- Lenguaje: Python 3.10+
+- Interfaz gráfica: Tkinter
+- Base de datos: SQLite3
+- Librerías opcionales: Pillow (para imágenes), ReportLab (PDF)
+
+4. Estructura del Proyecto
+
+Describir brevemente cada carpeta y archivo:
+- main.py: Archivo principal que lanza la app.
+- db/: Base de datos hotel.db.
+- models/: Lógica de conexión y consultas a base de datos.
+- controllers/: Funciones de negocio y validación.
+- views/: Interfaces gráficas en Tkinter.
+- doc/: Documentación técnica.
+- assets/: Imágenes e íconos.
+- README.md: Instrucciones de instalación.
+
+5. Historias de Usuario
+
+🧍 HU1 – Registro de huésped:
+Como recepcionista, quiero registrar un huésped con nombre, DNI, email y teléfono para poder asociarlo a una reserva.
+🛏️ HU2 – Crear reserva:
+Como recepcionista, quiero crear una reserva seleccionando un huésped, una habitación disponible y un rango de fechas para confirmar la estadía.
+🚪 HU3 – Realizar check-in:
+Como recepcionista, quiero registrar que un huésped ha ingresado para liberar la habitación al final de la estadía.
+🔍 HU4 – Consultar disponibilidad:
+Como recepcionista, quiero ver qué habitaciones están disponibles entre dos fechas para asignarlas en nuevas reservas.
+
+6. Pruebas de Aceptación
+
+🔸 Prueba HU1 – Registro de huésped:
+✓ El sistema muestra un formulario de ingreso.
+✓ Al completar y guardar, el huésped aparece en la lista.
+✓ Se valida que no se ingresen campos vacíos.
+🔸 Prueba HU2 – Crear reserva:
+✓ Al seleccionar un huésped y habitación, se bloquean fechas ya reservadas.
+✓ La reserva se guarda correctamente en la base de datos.
+🔸 Prueba HU3 – Check-in:
+✓ Al hacer check-in, la habitación cambia a estado 'ocupada'.
+
+7. Manual de uso
+
+- Abrir main.py → Ejecutar aplicación.
+- Usar menú principal para acceder a:
+  - Gestión de huéspedes
+  - Gestión de habitaciones
+  - Crear reserva
+  - Check-in y check-out
+  - Consultar reservas
+- Al cerrar la app, los datos quedan guardados automáticamente.
+
+8. Mejoras futuras
+
+- Exportar facturas en PDF.
+- Agregar roles de usuario (recepcionista, gerente).
+- Implementar backup automático de la base de datos.
+- Agregar estadísticas mensuales.
+
+9. Créditos
+
+Desarrolladores:
+- Uziel (Backend)
+- Lucas (Frontend - GUI)
+- Lautaro (Documentación, testing e integración)
