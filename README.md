@@ -102,6 +102,5 @@ python main.py
 
 ---
 
-## ✉️ Equipo de Desarollo
+## ⚖️ Equipo de Desarollo
 Autores: Lucas Parejas, Uziel Gamarra, Lautaro Loyola 
->>>>>>> 62b266ca083516a452172ff66fa6f0274adac7b6
