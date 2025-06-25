@@ -1,4 +1,4 @@
 from views.main_window import iniciar_app
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     iniciar_app()
