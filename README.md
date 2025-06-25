@@ -41,6 +41,7 @@ La aplicación permite al recepcionista:
 ---
 
 ## 📂 Estructura del Proyecto
+```bash
 hotel_app/
 ├── main.py                      ← inicia la app (Tkinter)
 ├── db/
@@ -54,6 +55,7 @@ hotel_app/
 │   └── logic.py                 ← Python puro: lógica de negocio
 └── assets/
     └── icons/                   ← recursos visuales
+```
 
 ---
 
